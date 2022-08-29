@@ -12,6 +12,11 @@ namespace ScriptableObjectArchitecture.Editor
         {
             get { return serializedObject.FindProperty(LIST_PROPERTY_NAME);}
         }
+        
+        private SerializedProperty ResetProperty
+        {
+            get { return serializedObject.FindProperty(RESET_PROPERTY_NAME);}
+        }
 
         private ReorderableList _reorderableList;
 
@@ -30,6 +35,7 @@ namespace ScriptableObjectArchitecture.Editor
 
         // Property Names
         private const string LIST_PROPERTY_NAME = "_list";
+        private const string RESET_PROPERTY_NAME = "_reset";
 
         private void OnEnable()
         {
@@ -54,7 +60,7 @@ namespace ScriptableObjectArchitecture.Editor
             EditorGUI.BeginChangeCheck();
 
             _reorderableList.DoLayoutList();
-
+            EditorGUILayout.PropertyField(ResetProperty);
             if (EditorGUI.EndChangeCheck())
             {
                 serializedObject.ApplyModifiedProperties();

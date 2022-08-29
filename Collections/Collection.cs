@@ -21,6 +21,8 @@ namespace ScriptableObjectArchitecture
 
         [SerializeField]
         private List<T> _list = new List<T>();
+        [SerializeField]
+        private bool _reset;
 
         public override IList List
         {
@@ -80,6 +82,14 @@ namespace ScriptableObjectArchitecture
         }
         public T[] ToArray() {
             return _list.ToArray();
+        }
+
+        public void OnEnable()
+        {
+            if (_reset)
+            {
+                _list.Clear();
+            }
         }
     } 
 }
